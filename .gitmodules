@@ -1,0 +1,6 @@
+[submodule "priv/cldr-core"]
+	path = priv/cldr-core
+	url = https://github.com/unicode-cldr/cldr-core.git
+[submodule "priv/cldr-localenames-full"]
+	path = priv/cldr-localenames-full
+	url = https://github.com/unicode-cldr/cldr-localenames-full.git
