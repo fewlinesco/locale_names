@@ -2,21 +2,21 @@ defmodule LocaleBuilder do
   alias Kaur.Result
 
   def locale_name(locale) do
-    language = language_from_locale(locale)
+    locale
+    |> language_from_locale()
+    |> Result.ok()
+    |> Result.and_then(&locale_display_names/1)
+    |> Result.map(fn display_names ->
+      case display_names[locale] do
+        # No name for this particular locale, reverting to the language name
+        nil ->
+          capitalize(display_names[language_from_locale(locale)])
 
-    case locale_display_names(language) do
-      {:ok, display_names} ->
-        case display_names[locale] do
-          nil ->
-            capitalize(display_names[language])
-
-          language_name ->
-            capitalize(language_name)
-        end
-
-      _ ->
-        {:error, :no_locale_found}
-    end
+        language_name ->
+          capitalize(language_name)
+      end
+    end)
+    |> Result.map_error(fn _ -> :no_locale_found end)
   end
 
   defp capitalize(nil), do: nil
