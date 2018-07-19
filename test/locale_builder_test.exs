@@ -13,6 +13,6 @@ defmodule LocaleBuilderTest do
   end
 
   test "locale_name: should error when passed an unvalid locale" do
-    assert {:error, :no_locale_found} == LocaleBuilder.locale_name("not a locale")
+    assert {:error, :locale_does_not_exist} == LocaleBuilder.locale_name("not a locale")
   end
 end
