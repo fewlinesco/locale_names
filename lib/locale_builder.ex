@@ -1,6 +1,23 @@
 defmodule LocaleBuilder do
   alias Kaur.Result
 
+  defstruct [:locale, :name, :direction]
+
+  def locale(locale) do
+    direction = locale_direction(locale)
+    name = locale_name(locale)
+
+    [direction, name]
+    |> Result.sequence()
+    |> Result.map(fn [direction, name] ->
+      %__MODULE__{
+        locale: locale,
+        direction: direction,
+        name: name
+      }
+    end)
+  end
+
   def locale_direction(locale) do
     locale
     |> language_from_locale()

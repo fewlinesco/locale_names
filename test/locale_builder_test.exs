@@ -22,4 +22,32 @@ defmodule LocaleBuilderTest do
     assert {:ok, :left_to_right} == LocaleBuilder.locale_direction("az-AZ")
     assert {:ok, :right_to_left} == LocaleBuilder.locale_direction("az-IQ")
   end
+
+  test "locale: should return a struct with all locale info" do
+    french_locale = %LocaleBuilder{
+      locale: "fr-FR",
+      name: "Français",
+      direction: :left_to_right
+    }
+
+    azerbaijani_iraq_locale = %LocaleBuilder{
+      locale: "az-IQ",
+      name: "Azərbaycan",
+      direction: :right_to_left
+    }
+
+    azerbaijani_locale = %LocaleBuilder{
+      locale: "az-AZ",
+      name: "Azərbaycan",
+      direction: :left_to_right
+    }
+
+    assert {:ok, french_locale} == LocaleBuilder.locale("fr-FR")
+    assert {:ok, azerbaijani_iraq_locale} == LocaleBuilder.locale("az-IQ")
+    assert {:ok, azerbaijani_locale} == LocaleBuilder.locale("az-AZ")
+  end
+
+  test "locale: should return an error wih a unvalid locale" do
+    assert {:error, :locale_does_not_exist} == LocaleBuilder.locale("not a locale")
+  end
 end
