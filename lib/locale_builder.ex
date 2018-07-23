@@ -1,7 +1,19 @@
 defmodule LocaleBuilder do
   alias Kaur.Result
 
-  defstruct [:locale, :name, :direction]
+  def all_locales do
+    CLDR.available_locales()
+    |> Enum.reduce([], fn locale, acc ->
+      case String.contains?(locale, "-") do
+        true -> [locale | acc]
+        false -> [locale <> "-" <> String.upcase(locale) | [locale | acc]]
+      end
+    end)
+  end
+
+  def locale?(locale) do
+    Enum.member?(all_locales(), locale)
+  end
 
   def locale(locale) do
     direction = locale_direction(locale)
@@ -10,7 +22,7 @@ defmodule LocaleBuilder do
     [direction, name]
     |> Result.sequence()
     |> Result.map(fn [direction, name] ->
-      %__MODULE__{
+      %Locale{
         locale: locale,
         direction: direction,
         name: name

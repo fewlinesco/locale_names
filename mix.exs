@@ -21,6 +21,7 @@ defmodule LocaleNames.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:benchee, "~> 0.11", only: :dev},
       {:kaur, "~> 1.1.0"},
       {:poison, "~> 3.1"}
     ]

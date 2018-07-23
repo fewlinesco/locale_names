@@ -29,7 +29,7 @@ defmodule CLDRTest do
     assert {:ok, "Latn"} == CLDR.likely_script("fr")
     assert {:ok, "Cyrl"} == CLDR.likely_script("ru")
     assert {:ok, "Latn"} == CLDR.likely_script("az")
-    assert {:ok, "Arab"} == CLDR.likely_script("az", "az-IQ")
+    assert {:ok, "Arab"} == CLDR.likely_script("az", "az-Arab")
   end
 
   test "likely_script: should error with an invalid language" do
