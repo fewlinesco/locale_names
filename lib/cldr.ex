@@ -12,7 +12,7 @@ defmodule CLDR do
       :enoent -> :locale_does_not_exist
       error -> error
     end)
-    |> Result.map(&Poison.decode!/1)
+    |> Result.and_then(&Poison.decode/1)
     |> Result.map(&get_in(&1, ["scriptMetadata", script, "rtl"]))
     |> Result.keep_if(fn script -> script != nil end, :script_does_not_exist)
     |> Result.map(&direction/1)
@@ -26,31 +26,28 @@ defmodule CLDR do
       :enoent -> :locale_does_not_exist
       error -> error
     end)
-    |> Result.map(&Poison.decode!/1)
+    |> Result.and_then(&Poison.decode/1)
     |> Result.map(&get_in(&1, ["main", language, "localeDisplayNames", "languages"]))
   end
 
   def likely_script(language, locale \\ "") do
     @likely_subtags_path
     |> File.read()
-    |> Result.map(&Poison.decode!/1)
+    |> Result.and_then(&Poison.decode/1)
     |> Result.map(&get_in(&1, ["supplemental", "likelySubtags"]))
     |> Result.and_then(&fetch_likely_script(&1, language, locale))
     |> Result.map(&String.split(&1, "-"))
     |> Result.map(&Enum.at(&1, 1))
+    |> Result.keep_if(fn script -> script != nil end, :script_does_not_exist)
   end
 
   defp fetch_likely_script(subtags, language, locale) do
-    Result.Map.fetch_with_fallback(subtags, [locale, language], :locale_does_not_exist)
+    Result.Map.fetch_first(subtags, [locale, language], :locale_does_not_exist)
   end
 
-  defp direction(rtl) do
-    case rtl do
-      "YES" -> :right_to_left
-      "NO" -> :left_to_right
-      _ -> :unknown_direction
-    end
-  end
+  defp direction("YES"), do: :right_to_left
+  defp direction("NO"), do: :left_to_right
+  defp direction(_), do: :unknown_direction
 
   defp full_localenames_path(language) do
     @localenames_path <> "/main/#{language}/languages.json"

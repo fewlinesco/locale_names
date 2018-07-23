@@ -43,7 +43,7 @@ defmodule LocaleBuilder do
     locale
     |> language_from_locale()
     |> Result.and_then(fn language ->
-      Result.Map.fetch_with_fallback(display_names, [locale, language], :language_does_not_exist)
+      Result.Map.fetch_first(display_names, [locale, language], :language_does_not_exist)
     end)
     |> Result.map(&capitalize/1)
   end
