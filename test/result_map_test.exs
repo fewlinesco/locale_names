@@ -15,13 +15,13 @@ defmodule Kaur.Result.MapTest do
     assert {:error, :key_does_not_exist} == Result.Map.fetch(%{}, :my_key, :key_does_not_exist)
   end
 
-  test "fetch_with_fallback: should work like a fetch when one of the keys exists" do
+  test "fetch_first: should work like a fetch when one of the keys exists" do
     map = %{
       my_key: "my_value"
     }
 
     assert {:ok, "my_value"} ==
-             Result.Map.fetch_with_fallback(
+             Result.Map.fetch_first(
                map,
                [:non_existant_key, :my_key],
                :key_does_not_exist
@@ -30,6 +30,6 @@ defmodule Kaur.Result.MapTest do
 
   test "fetch: should have a reason when none of the keys exist" do
     assert {:error, :key_does_not_exist} ==
-             Result.Map.fetch_with_fallback(%{}, [:key1, :key2, :key3], :key_does_not_exist)
+             Result.Map.fetch_first(%{}, [:key1, :key2, :key3], :key_does_not_exist)
   end
 end

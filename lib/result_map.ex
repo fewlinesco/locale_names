@@ -8,18 +8,15 @@ defmodule Kaur.Result.Map do
     end
   end
 
-  def fetch_with_fallback(map, keys, error_reason) do
+  def fetch_first(map, keys, error_reason) do
     case keys do
       [] ->
         Result.error(error_reason)
 
-      [key] ->
-        fetch(map, key, error_reason)
-
       [key | rest] ->
-        fetch(map, key, :key_not_found)
+        fetch(map, key, error_reason)
         |> Result.or_else(fn
-          :key_not_found -> fetch_with_fallback(map, rest, error_reason)
+          ^error_reason -> fetch_first(map, rest, error_reason)
           error -> error
         end)
     end
