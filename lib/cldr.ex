@@ -9,12 +9,12 @@ defmodule CLDR do
     @script_path
     |> File.read()
     |> Result.map_error(fn
-      :enoent -> :locale_does_not_exist
+      :enoent -> :locale_not_found
       error -> error
     end)
     |> Result.and_then(&Poison.decode/1)
     |> Result.map(&get_in(&1, ["scriptMetadata", script, "rtl"]))
-    |> Result.keep_if(fn script -> script != nil end, :script_does_not_exist)
+    |> Result.keep_if(fn script -> script != nil end, :script_not_found)
     |> Result.map(&direction/1)
   end
 
@@ -23,7 +23,7 @@ defmodule CLDR do
     |> full_localenames_path()
     |> File.read()
     |> Result.map_error(fn
-      :enoent -> :locale_does_not_exist
+      :enoent -> :locale_not_found
       error -> error
     end)
     |> Result.and_then(&Poison.decode/1)
@@ -38,11 +38,11 @@ defmodule CLDR do
     |> Result.and_then(&fetch_likely_script(&1, language, locale))
     |> Result.map(&String.split(&1, "-"))
     |> Result.map(&Enum.at(&1, 1))
-    |> Result.keep_if(fn script -> script != nil end, :script_does_not_exist)
+    |> Result.keep_if(fn script -> script != nil end, :script_not_found)
   end
 
   defp fetch_likely_script(subtags, language, locale) do
-    Result.Map.fetch_first(subtags, [locale, language], :locale_does_not_exist)
+    Result.Map.fetch_first(subtags, [locale, language], :locale_not_found)
   end
 
   defp direction("YES"), do: :right_to_left

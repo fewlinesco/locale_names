@@ -8,7 +8,7 @@ defmodule CLDRTest do
   end
 
   test "direction_from_script: should error for a made up script" do
-    assert {:error, :script_does_not_exist} == CLDR.direction_from_script("not a script")
+    assert {:error, :script_not_found} == CLDR.direction_from_script("not a script")
   end
 
   test "direction_from_script: should return unknown for unknown script" do
@@ -22,7 +22,7 @@ defmodule CLDRTest do
   end
 
   test "get_display_names: should error with an invalid language" do
-    assert {:error, :locale_does_not_exist} == CLDR.get_display_names("not a language")
+    assert {:error, :locale_not_found} == CLDR.get_display_names("not a language")
   end
 
   test "likely_script: should return the most likely script for a language" do
@@ -33,6 +33,6 @@ defmodule CLDRTest do
   end
 
   test "likely_script: should error with an invalid language" do
-    assert {:error, :locale_does_not_exist} == CLDR.likely_script("not a language")
+    assert {:error, :locale_not_found} == CLDR.likely_script("not a language")
   end
 end
