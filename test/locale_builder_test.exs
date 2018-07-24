@@ -67,6 +67,6 @@ defmodule LocaleBuilderTest do
   end
 
   test "locale: should return an error wih a unvalid locale" do
-    assert {:error, :locale_does_not_exist} == LocaleBuilder.locale("not a locale")
+    assert {:error, :locale_not_found} == LocaleBuilder.locale("not a locale")
   end
 end
