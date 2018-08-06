@@ -8,17 +8,14 @@ defmodule Kaur.Result.Map do
     end
   end
 
-  def fetch_first(map, keys, error_reason) do
-    case keys do
-      [] ->
-        Result.error(error_reason)
+  def fetch_first(map, keys, reason \\ :key_not_found)
 
-      [key | rest] ->
-        fetch(map, key, error_reason)
-        |> Result.or_else(fn
-          ^error_reason -> fetch_first(map, rest, error_reason)
-          error -> error
-        end)
+  def fetch_first(_map, [], reason), do: Result.error(reason)
+
+  def fetch_first(map, [head | tail], reason) do
+    case Map.fetch(map, head) do
+      :error -> fetch_first(map, tail, reason)
+      result -> result
     end
   end
 end
