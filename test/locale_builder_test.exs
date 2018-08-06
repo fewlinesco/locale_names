@@ -60,10 +60,10 @@ defmodule LocaleBuilderTest do
       direction: :left_to_right
     }
 
-    assert {:ok, french_locale} == LocaleBuilder.locale("fr-FR")
-    assert {:ok, french_canadian_locale} == LocaleBuilder.locale("fr-CA")
-    assert {:ok, azerbaijani_iraq_locale} == LocaleBuilder.locale("az-Arab")
-    assert {:ok, azerbaijani_locale} == LocaleBuilder.locale("az-AZ")
+    assert french_locale == LocaleBuilder.locale("fr-FR")
+    assert french_canadian_locale == LocaleBuilder.locale("fr-CA")
+    assert azerbaijani_iraq_locale == LocaleBuilder.locale("az-Arab")
+    assert azerbaijani_locale == LocaleBuilder.locale("az-AZ")
   end
 
   test "locale: should return an error wih a unvalid locale" do

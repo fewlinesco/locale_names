@@ -1,11 +1,9 @@
 defmodule Locale do
   defstruct [:locale, :name, :direction]
 
-  {:ok, languages} = CLDR.languages()
-
-  for language <- languages do
-    def locale?(unquote(language)), do: true
+  for language <- CLDR.languages() do
     def locale(unquote(language)), do: unquote(Macro.escape(LocaleBuilder.locale(language)))
+    def locale?(unquote(language)), do: true
 
     scripts = CLDR.script_for_language(language)
 

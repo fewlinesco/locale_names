@@ -22,7 +22,6 @@ defmodule LocaleNames.MixProject do
   defp deps do
     [
       {:benchee, "~> 0.11", only: :dev},
-      {:kaur, "~> 1.1.0"},
       {:poison, "~> 3.1"}
     ]
   end

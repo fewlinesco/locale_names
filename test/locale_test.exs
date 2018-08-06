@@ -36,9 +36,9 @@ defmodule LocaleTest do
       direction: :left_to_right
     }
 
-    assert {:ok, french_locale} == Locale.locale("fr-FR")
-    assert {:ok, french_canadian_locale} == Locale.locale("fr-CA")
-    assert {:ok, azerbaijani_iraq_locale} == Locale.locale("az-Arab")
-    assert {:ok, azerbaijani_locale} == Locale.locale("az-AZ")
+    assert french_locale == Locale.locale("fr-FR")
+    assert french_canadian_locale == Locale.locale("fr-CA")
+    assert azerbaijani_iraq_locale == Locale.locale("az-Arab")
+    assert azerbaijani_locale == Locale.locale("az-AZ")
   end
 end

@@ -3,20 +3,20 @@ defmodule CLDRTest do
   doctest CLDR
 
   test "direction_from_script: should return a direction from a script" do
-    assert {:ok, :left_to_right} == CLDR.direction_from_script("Latn")
-    assert {:ok, :right_to_left} == CLDR.direction_from_script("Arab")
+    assert :left_to_right == CLDR.direction_from_script("Latn")
+    assert :right_to_left == CLDR.direction_from_script("Arab")
   end
 
   test "direction_from_script: should error for a made up script" do
-    assert {:error, :script_not_found} == CLDR.direction_from_script("not a script")
+    assert :unknown_direction == CLDR.direction_from_script("not a script")
   end
 
   test "direction_from_script: should return unknown for unknown script" do
-    assert {:ok, :unknown_direction} == CLDR.direction_from_script("Zzzz")
+    assert :unknown_direction == CLDR.direction_from_script("Zzzz")
   end
 
   test "get_display_names: should return a list of languages" do
-    assert {:ok, language_map} = CLDR.get_display_names("fr")
+    language_map = CLDR.get_display_names("fr")
     assert "français" == language_map["fr"]
     assert "swahili du Congo" == language_map["sw-CD"]
   end
