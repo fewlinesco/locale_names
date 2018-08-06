@@ -6,9 +6,17 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-performance
       - run: git submodule init
       - run: git submodule update
       - run: mix local.rebar --force
       - run: mix local.hex --force
       - run: mix deps.get
+      - run: .circleci/create_benchmark.sh
+      - save_cache:
+          key: v1-performance
+          paths:
+            - ~/performance
       - run: mix test

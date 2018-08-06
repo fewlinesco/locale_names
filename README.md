@@ -35,3 +35,18 @@ be found at [https://hexdocs.pm/locale_names](https://hexdocs.pm/locale_names).
   direction: :left_to_right
 }
 ```
+
+## Tests
+
+```
+mix test
+```
+
+If you're launching the tests for the first time, continue reading:
+
+The tests will do a benchmark and fail if the results are
+To update the benchmark base file against which tests are compared:
+
+```
+mix benchmark --json --update-json
+```
