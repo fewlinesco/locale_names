@@ -6,6 +6,8 @@ Library that provide several things:
 - What is the reading direction of the language of a locale (left to right or right to left)
 - Is a string that looks that a locale really a locale
 
+This project should support all modern locales from the [CLDR Project](https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json) except the `root` locale as it does not make sense in a context where we need locales.
+
 ## Installation
 
 If [available in Hex](https://hex.pm/docs/publish), the package can be installed
