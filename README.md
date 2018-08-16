@@ -46,7 +46,7 @@ mix test
 
 If you're launching the tests for the first time, continue reading:
 
-The tests will do a benchmark and fail if the results are
+The tests will do a benchmark and fail if the results are significantly slower than the baseline.
 To update the benchmark base file against which tests are compared:
 
 ```
