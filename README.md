@@ -1,10 +1,10 @@
 # Locale
 
-This library provides:
+This library provides functions for knowing:
 
 - How is a locale spelled in its own language (`en-US` is "American English", `fr-CA` is "Français canadien")
 - What is the reading direction of the language of a locale (left to right or right to left)
-- Is a string that looks that a locale really a locale
+- If a given string matches a locale
 
 This project supports all modern locales from the [CLDR Project](https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json) except the `root` locale as it does not make sense in a context where we need locales.
 
