@@ -1,12 +1,12 @@
 # Locale
 
-Library that provide several things:
+This library provides:
 
-- How is a locale named in its native tongue (`en-US` is "American English", `fr-CA` is "Français canadien")
+- How is a locale spelled in its own language (`en-US` is "American English", `fr-CA` is "Français canadien")
 - What is the reading direction of the language of a locale (left to right or right to left)
 - Is a string that looks that a locale really a locale
 
-This project should support all modern locales from the [CLDR Project](https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json) except the `root` locale as it does not make sense in a context where we need locales.
+This project supports all modern locales from the [CLDR Project](https://github.com/unicode-cldr/cldr-core/blob/master/availableLocales.json) except the `root` locale as it does not make sense in a context where we need locales.
 
 ## Installation
 
@@ -27,8 +27,8 @@ be found at [https://hexdocs.pm/locale_names](https://hexdocs.pm/locale_names).
 
 ## Usage
 
-`locale?(string)` will return a boolean if the locale is correct
-`locale(locale)` will return a struct that look like this:
+`locale?(string)` will return a boolean representing if the string matches a locale or not
+`locale(locale)` will return a struct that looks like this:
 
 ```elixir
 %Locale{
