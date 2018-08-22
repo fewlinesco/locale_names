@@ -1,5 +1,15 @@
 defmodule Locale do
+  @type locale_code() :: String.t()
+  @type locale() :: %Locale{
+          locale: locale_code(),
+          name: String.t(),
+          direction: :left_to_right | :right_to_left
+        }
+
   defstruct [:locale, :name, :direction]
+
+  @spec locale?(locale_code()) :: boolean()
+  @spec locale(locale_code()) :: locale() | {:error, :locale_not_found}
 
   for language <- CLDR.languages() do
     def locale(unquote(language)), do: unquote(Macro.escape(LocaleBuilder.locale(language)))
@@ -36,5 +46,6 @@ defmodule Locale do
   end
 
   def locale?(_), do: false
-  def locale(_), do: {:error, :locale_not_found}
+
+  def(locale(_), do: {:error, :locale_not_found})
 end
