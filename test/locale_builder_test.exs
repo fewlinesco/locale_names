@@ -2,13 +2,18 @@ defmodule LocaleBuilderTest do
   use ExUnit.Case
   doctest LocaleBuilder
 
-  test "all_locales: should return a list of all locales" do
-    all_locales = LocaleBuilder.all_locales()
-    assert Enum.member?(all_locales, "fr")
-    assert Enum.member?(all_locales, "fr-FR")
+  test "all_locale_codes: should return a list of all locales" do
+    all_locale_codes = LocaleBuilder.all_locale_codes()
+    assert Enum.member?(all_locale_codes, "fr")
+    assert Enum.member?(all_locale_codes, "fr-FR")
   end
 
-  test "locale?: should return a boolean if a locale exist" do
+  test "english_locale_name: should get the name of a locale in english" do
+    assert {:ok, "Azerbaijani"} == LocaleBuilder.english_locale_name("az")
+    assert {:ok, "French"} == LocaleBuilder.english_locale_name("fr-FR")
+  end
+
+  test "locale?: should return a boolean if a locale exists" do
     assert LocaleBuilder.locale?("fr-FR")
     assert LocaleBuilder.locale?("az-AZ")
     refute LocaleBuilder.locale?("not a locale")
@@ -37,27 +42,31 @@ defmodule LocaleBuilderTest do
 
   test "locale: should return a struct with all locale info" do
     french_locale = %Locale{
+      direction: :left_to_right,
+      english_name: "French",
       locale: "fr-FR",
-      name: "Français",
-      direction: :left_to_right
+      name: "Français"
     }
 
     french_canadian_locale = %Locale{
+      direction: :left_to_right,
+      english_name: "Canadian French",
       locale: "fr-CA",
-      name: "Français canadien",
-      direction: :left_to_right
+      name: "Français canadien"
     }
 
     azerbaijani_iraq_locale = %Locale{
+      direction: :right_to_left,
+      english_name: "Azerbaijani",
       locale: "az-Arab",
-      name: "Cənubi azərbaycan",
-      direction: :right_to_left
+      name: "Cənubi azərbaycan"
     }
 
     azerbaijani_locale = %Locale{
+      direction: :left_to_right,
+      english_name: "Azerbaijani",
       locale: "az-AZ",
-      name: "Azərbaycan",
-      direction: :left_to_right
+      name: "Azərbaycan"
     }
 
     assert french_locale == LocaleBuilder.locale("fr-FR")

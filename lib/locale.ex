@@ -1,12 +1,13 @@
 defmodule Locale do
   @type locale_code() :: String.t()
   @type locale() :: %Locale{
+          direction: :left_to_right | :right_to_left,
+          english_name: String.t(),
           locale: locale_code(),
-          name: String.t(),
-          direction: :left_to_right | :right_to_left
+          name: String.t()
         }
 
-  defstruct [:locale, :name, :direction]
+  defstruct [:direction, :english_name, :locale, :name]
 
   @spec locale?(locale_code()) :: boolean()
   @spec locale(locale_code()) :: locale() | {:error, :locale_not_found}
