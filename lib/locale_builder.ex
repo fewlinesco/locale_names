@@ -11,6 +11,20 @@ defmodule LocaleBuilder do
     end)
   end
 
+  @spec english_locale_name(Locale.locale_code()) ::
+          {:ok, String.t()} | {:error, :locale_not_found}
+  def english_locale_name(locale) do
+    display_names =
+      "en"
+      |> language_from_locale()
+      |> CLDR.get_display_names()
+
+    case display_names do
+      {:error, :locale_not_found} = error -> error
+      name_map -> {:ok, display_name(name_map, locale)}
+    end
+  end
+
   @spec locale?(Locale.locale_code()) :: boolean()
   def locale?(locale) do
     Enum.member?(all_locales(), locale)
@@ -19,10 +33,12 @@ defmodule LocaleBuilder do
   @spec locale(Locale.locale_code()) :: Locale.locale() | {:error, String.t()}
   def locale(locale) do
     with {:ok, direction} <- locale_direction(locale),
-         {:ok, name} <- locale_name(locale) do
+         {:ok, name} <- locale_name(locale),
+         {:ok, english_name} <- english_locale_name(locale) do
       %Locale{
-        locale: locale,
+        english_name: english_name,
         direction: direction,
+        locale: locale,
         name: name
       }
     else
