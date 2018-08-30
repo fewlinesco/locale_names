@@ -2,10 +2,10 @@ defmodule LocaleBuilderTest do
   use ExUnit.Case
   doctest LocaleBuilder
 
-  test "all_locales: should return a list of all locales" do
-    all_locales = LocaleBuilder.all_locales()
-    assert Enum.member?(all_locales, "fr")
-    assert Enum.member?(all_locales, "fr-FR")
+  test "all_locale_codes: should return a list of all locales" do
+    all_locale_codes = LocaleBuilder.all_locale_codes()
+    assert Enum.member?(all_locale_codes, "fr")
+    assert Enum.member?(all_locale_codes, "fr-FR")
   end
 
   test "english_locale_name: should get the name of a locale in english" do
@@ -13,7 +13,7 @@ defmodule LocaleBuilderTest do
     assert {:ok, "French"} == LocaleBuilder.english_locale_name("fr-FR")
   end
 
-  test "locale?: should return a boolean if a locale exist" do
+  test "locale?: should return a boolean if a locale exists" do
     assert LocaleBuilder.locale?("fr-FR")
     assert LocaleBuilder.locale?("az-AZ")
     refute LocaleBuilder.locale?("not a locale")
