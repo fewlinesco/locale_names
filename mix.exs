@@ -5,9 +5,10 @@ defmodule LocaleNames.MixProject do
     [
       app: :locale_names,
       version: "0.1.0",
-      elixir: "~> 1.6",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      deps: deps(),
+      dialyzer: dialyzer()
     ]
   end
 
@@ -23,7 +24,12 @@ defmodule LocaleNames.MixProject do
     [
       {:benchee, "~> 0.11", only: [:dev, :test]},
       {:benchee_json, "~> 0.4", only: [:dev, :test]},
+      {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:poison, "~> 3.1"}
     ]
+  end
+
+  defp dialyzer do
+    [verbose: true, plt_add_deps: :app_tree, flags: [:error_handling, :race_conditions]]
   end
 end

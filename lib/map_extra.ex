@@ -1,4 +1,7 @@
 defmodule Map.Extra do
+  @type atom_or_string() :: atom() | String.t()
+
+  @spec fetch(map(), atom_or_string(), any()) :: {:ok, any()} | {:error, any()}
   def fetch(map, key, error_reason) do
     case Map.fetch(map, key) do
       :error -> {:error, error_reason}
@@ -6,6 +9,8 @@ defmodule Map.Extra do
     end
   end
 
+  @spec fetch_first(map(), list(atom_or_string()), atom_or_string()) ::
+          {:ok, any()} | {:error, any()}
   def fetch_first(map, keys, error_reason) do
     case keys do
       [] ->
