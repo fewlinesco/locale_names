@@ -1,4 +1,6 @@
 defmodule CLDR do
+  @moduledoc false
+
   @available_locales_path "priv/cldr-core/availableLocales.json"
   @language_data_path "priv/cldr-core/supplemental/languageData.json"
   @script_path "priv/cldr-core/scriptMetadata.json"

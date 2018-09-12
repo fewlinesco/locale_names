@@ -1,4 +1,6 @@
-# Locale
+# Locale Names
+
+[![CircleCI](https://circleci.com/gh/fewlinesco/locale_names.svg?style=svg)](https://circleci.com/gh/fewlinesco/locale_names)
 
 This library provides functions for knowing:
 

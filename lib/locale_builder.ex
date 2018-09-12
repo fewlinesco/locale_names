@@ -1,4 +1,6 @@
 defmodule LocaleBuilder do
+  @moduledoc false
+
   @spec all_locale_codes() :: list(Locale.locale_code())
   def all_locale_codes do
     CLDR.available_locales()

@@ -25,6 +25,7 @@ defmodule LocaleNames.MixProject do
       {:benchee, "~> 0.11", only: [:dev, :test]},
       {:benchee_json, "~> 0.4", only: [:dev, :test]},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.14", only: :dev},
       {:poison, "~> 3.1"}
     ]
   end

@@ -1,6 +1,8 @@
 defmodule LocaleTest do
   use ExUnit.Case
 
+  doctest Locale
+
   test "locale?: should return true with a correct locale" do
     assert Locale.locale?("fr-FR")
     assert Locale.locale?("en-US")

@@ -1,4 +1,6 @@
 defmodule Map.Extra do
+  @moduledoc false
+
   @type atom_or_string() :: atom() | String.t()
 
   @spec fetch(map(), atom_or_string(), any()) :: {:ok, any()} | {:error, any()}
