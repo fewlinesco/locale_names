@@ -32,24 +32,25 @@ defmodule LocaleBuilder do
     Enum.member?(all_locale_codes(), locale_code)
   end
 
-  @spec locale(Locale.locale_code()) :: Locale.locale() | {:error, String.t()}
+  @spec locale(Locale.locale_code()) :: {:ok, Locale.locale()} | {:error, String.t()}
   def locale(locale_code) do
     with {:ok, direction} <- locale_direction(locale_code),
          {:ok, name} <- locale_name(locale_code),
          {:ok, english_name} <- english_locale_name(locale_code) do
-      %Locale{
-        english_name: english_name,
-        direction: direction,
-        locale: locale_code,
-        name: name
-      }
+      {:ok,
+       %Locale{
+         english_name: english_name,
+         direction: direction,
+         locale_code: locale_code,
+         name: name
+       }}
     else
       error -> error
     end
   end
 
   @spec locale_direction(Locale.locale_code()) ::
-          {:ok, CLDR.direction_type()} | {:error, :locale_not_found}
+          {:ok, Locale.direction_type()} | {:error, :locale_not_found}
   def locale_direction(locale_code) do
     with language = language_from_locale_code(locale_code),
          {:ok, script} <- CLDR.likely_script(language, locale_code),

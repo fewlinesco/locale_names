@@ -17,34 +17,34 @@ defmodule LocaleTest do
     french_locale = %Locale{
       direction: :left_to_right,
       english_name: "French",
-      locale: "fr-FR",
+      locale_code: "fr-FR",
       name: "Français"
     }
 
     french_canadian_locale = %Locale{
       direction: :left_to_right,
       english_name: "Canadian French",
-      locale: "fr-CA",
+      locale_code: "fr-CA",
       name: "Français canadien"
     }
 
     azerbaijani_iraq_locale = %Locale{
       direction: :right_to_left,
       english_name: "Azerbaijani",
-      locale: "az-Arab",
+      locale_code: "az-Arab",
       name: "Cənubi azərbaycan"
     }
 
     azerbaijani_locale = %Locale{
       direction: :left_to_right,
       english_name: "Azerbaijani",
-      locale: "az-AZ",
+      locale_code: "az-AZ",
       name: "Azərbaycan"
     }
 
-    assert french_locale == Locale.locale("fr-FR")
-    assert french_canadian_locale == Locale.locale("fr-CA")
-    assert azerbaijani_iraq_locale == Locale.locale("az-Arab")
-    assert azerbaijani_locale == Locale.locale("az-AZ")
+    assert {:ok, french_locale} == Locale.locale("fr-FR")
+    assert {:ok, french_canadian_locale} == Locale.locale("fr-CA")
+    assert {:ok, azerbaijani_iraq_locale} == Locale.locale("az-Arab")
+    assert {:ok, azerbaijani_locale} == Locale.locale("az-AZ")
   end
 end
