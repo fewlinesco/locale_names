@@ -30,7 +30,7 @@ be found at [https://hexdocs.pm/locale_names](https://hexdocs.pm/locale_names).
 ## Usage
 
 `locale?(locale_code)` will return a boolean representing if the string matches a locale or not
-`locale(locale_code)` will return something that looks like this:
+`locale(locale_code)` will return a tuple that looks like this:
 
 ```elixir
 {:ok,
