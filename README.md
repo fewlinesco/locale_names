@@ -1,4 +1,6 @@
-# Locale
+# Locale Names
+
+[![CircleCI](https://circleci.com/gh/fewlinesco/locale_names.svg?style=svg)](https://circleci.com/gh/fewlinesco/locale_names)
 
 This library provides functions for knowing:
 
@@ -27,16 +29,21 @@ be found at [https://hexdocs.pm/locale_names](https://hexdocs.pm/locale_names).
 
 ## Usage
 
-`locale?(string)` will return a boolean representing if the string matches a locale or not
-`locale(locale)` will return a struct that looks like this:
+`locale?(locale_code)` will return a boolean representing if the string matches a locale or not
+`locale(locale_code)` will return a tuple that looks like this:
 
 ```elixir
-%Locale{
-  locale: "fr-CA",
-  name: "Français canadien",
-  direction: :left_to_right
+{:ok,
+  %Locale{
+    direction: :left_to_right,
+    english_name: "Canadian French",
+    locale_code: "fr-CA",
+    name: "Français canadien"
+  }
 }
 ```
+
+or an error `{:error, :locale_not_found}`
 
 ## Tests
 

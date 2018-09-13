@@ -1,11 +1,12 @@
 defmodule CLDR do
+  @moduledoc false
+
   @available_locales_path "priv/cldr-core/availableLocales.json"
   @language_data_path "priv/cldr-core/supplemental/languageData.json"
   @script_path "priv/cldr-core/scriptMetadata.json"
   @likely_subtags_path "priv/cldr-core/supplemental/likelySubtags.json"
   @localenames_path "priv/cldr-localenames-full"
 
-  @type direction_type() :: :left_to_right | :right_to_left | :unknown_direction
   @type language() :: String.t()
   @type script() :: String.t()
 
@@ -18,7 +19,7 @@ defmodule CLDR do
     |> Enum.reject(fn locale -> locale == "root" end)
   end
 
-  @spec direction_from_script(script()) :: direction_type()
+  @spec direction_from_script(script()) :: Locale.direction_type()
   def direction_from_script(script) do
     @script_path
     |> File.read!()
@@ -116,7 +117,7 @@ defmodule CLDR do
     Map.Extra.fetch_first(subtags, [locale, language], :locale_not_found)
   end
 
-  @spec direction(String.t()) :: direction_type()
+  @spec direction(String.t()) :: Locale.direction_type()
   defp direction("YES"), do: :right_to_left
   defp direction("NO"), do: :left_to_right
   defp direction(_), do: :unknown_direction
