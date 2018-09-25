@@ -44,5 +44,6 @@ jobs:
           paths:
             - ~/performance
       - run: mix test
+      - run: mix dialyzer --halt-exit-status
       - store_test_results:
           path: _build/test/lib/locale_names
