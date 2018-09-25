@@ -32,7 +32,7 @@ defmodule LocaleNames.MixProject do
 
   defp dialyzer do
     [
-      flags: [:error_handling, :no_opaque, :race_conditions, :underspecs, :unmatched_returns],
+      flags: [:error_handling, :no_opaque, :race_conditions, :unmatched_returns],
       plt_add_apps: [:mix],
       plt_add_deps: :app_tree
     ]
