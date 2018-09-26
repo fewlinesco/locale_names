@@ -52,7 +52,7 @@ defmodule LocaleBuilder do
   @spec locale_direction(Locale.locale_code()) ::
           {:ok, Locale.direction_type()} | {:error, :locale_not_found}
   def locale_direction(locale_code) do
-    with language <- language_from_locale_code(locale_code),
+    with language = language_from_locale_code(locale_code),
          {:ok, script} <- CLDR.likely_script(language, locale_code),
          direction <- CLDR.direction_from_script(script) do
       {:ok, direction}
