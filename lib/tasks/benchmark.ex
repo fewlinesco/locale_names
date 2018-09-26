@@ -1,6 +1,7 @@
 defmodule Mix.Tasks.Benchmark do
   use Mix.Task
 
+  @impl true
   def run(args) do
     languages = CLDR.languages()
 

@@ -32,6 +32,7 @@ jobs:
       - save_cache:
           key: v1-mix-cache
           paths: "deps"
+      - run: mix dialyzer --halt-exit-status
       - save_cache:
           key: v1-build-cache-{{ .Branch }}
           paths: "_build"

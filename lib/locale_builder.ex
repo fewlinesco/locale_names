@@ -57,7 +57,7 @@ defmodule LocaleBuilder do
          direction <- CLDR.direction_from_script(script) do
       {:ok, direction}
     else
-      error -> error
+      _error -> {:error, :locale_not_found}
     end
   end
 

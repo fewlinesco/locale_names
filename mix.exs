@@ -31,6 +31,10 @@ defmodule LocaleNames.MixProject do
   end
 
   defp dialyzer do
-    [verbose: true, plt_add_deps: :app_tree, flags: [:error_handling, :race_conditions]]
+    [
+      flags: [:error_handling, :no_opaque, :race_conditions, :unmatched_returns],
+      plt_add_apps: [:mix],
+      plt_add_deps: :app_tree
+    ]
   end
 end
