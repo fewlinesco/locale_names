@@ -1,14 +1,22 @@
 defmodule LocaleNames.MixProject do
   use Mix.Project
 
+  @project_url "https://github.com/fewlinesco/locale_names"
+
   def project do
     [
       app: :locale_names,
-      version: "1.0.0",
-      elixir: "~> 1.6",
-      start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: dialyzer()
+      description: "Translation, spelling and direction of locales",
+      dialyzer: dialyzer(),
+      docs: [main: "readme", extras: ["README.md"]],
+      elixir: "~> 1.6",
+      homepage_url: @project_url,
+      name: "Locale Names",
+      source_url: @project_url,
+      start_permanent: Mix.env() == :prod,
+      test_coverage: [tool: ExCoveralls],
+      version: "1.0.0"
     ]
   end
 
@@ -26,6 +34,7 @@ defmodule LocaleNames.MixProject do
       {:benchee_json, "~> 0.4", only: [:dev, :test]},
       {:dialyxir, "~> 0.5", only: [:dev, :test], runtime: false},
       {:ex_doc, "~> 0.14", only: :dev},
+      {:excoveralls, "~> 0.7.1", only: :test},
       {:poison, "~> 3.1"}
     ]
   end
@@ -35,6 +44,25 @@ defmodule LocaleNames.MixProject do
       flags: [:error_handling, :no_opaque, :race_conditions, :unmatched_returns],
       plt_add_apps: [:mix],
       plt_add_deps: :app_tree
+    ]
+  end
+
+  defp package do
+    [
+      files: [
+        "lib",
+        "LICENSE*",
+        "mix.exs",
+        "priv/cldr-core/availableLocales.json",
+        "priv/cldr-core/scriptMetadata.json",
+        "priv/cldr-core/supplemental/languageData.json",
+        "priv/cldr-core/supplemental/likelySubtags.json",
+        "priv/cldr-localenames-full/main",
+        "README*"
+      ],
+      licenses: ["MIT"],
+      links: %{"GitHub" => @project_url},
+      maintainers: ["Vincent Billey", "Kevin Disneur"]
     ]
   end
 end
