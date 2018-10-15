@@ -13,6 +13,7 @@ defmodule LocaleNames.MixProject do
       elixir: "~> 1.6",
       homepage_url: @project_url,
       name: "Locale Names",
+      package: package(),
       source_url: @project_url,
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
