@@ -58,7 +58,8 @@ defmodule LocaleNames.MixProject do
         "priv/cldr-core/scriptMetadata.json",
         "priv/cldr-core/supplemental/languageData.json",
         "priv/cldr-core/supplemental/likelySubtags.json",
-        "priv/cldr-localenames-full/main",
+        "priv/cldr-localenames-full/main/**/languages.json",
+        "priv/cldr-localenames-full/main/**/territories.json",
         "README*"
       ],
       licenses: ["MIT"],
