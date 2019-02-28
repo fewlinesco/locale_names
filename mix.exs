@@ -17,7 +17,7 @@ defmodule LocaleNames.MixProject do
       source_url: @project_url,
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "1.0.0"
+      version: "1.0.1"
     ]
   end
 
