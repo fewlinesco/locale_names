@@ -16,6 +16,7 @@ Before submitting a Pull Request, please ensure the following:
 ```
 $ git clone https://github.com/fewlinesco/locale_names.git
 $ cd locale_names
+$ git submodule update --init
 $ mix deps.get
 $ mix test
 ```

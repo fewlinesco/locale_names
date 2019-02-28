@@ -2,6 +2,8 @@
 
 [![CircleCI](https://circleci.com/gh/fewlinesco/locale_names.svg?style=svg)](https://circleci.com/gh/fewlinesco/locale_names)
 
+:warning: This library is no more maintained as we don't use it anymore. :warning:
+
 This library provides functions for knowing:
 
 - How is a locale spelled in its own language (`en-US` is "American English", `fr-CA` is "Français canadien")
